@@ -1,6 +1,6 @@
 FROM accetto/ubuntu-vnc-xfce-g3
 
-# Switch to root user to avoid permission issues2
+# Switch to root user to avoid permission issues
 USER root
 
 # Expose ports
@@ -12,25 +12,16 @@ ENV NVIDIA_DRIVER_CAPABILITIES="compute,video,utility"
 
 # Install dependencies and clean up
 RUN apt-get update && \
-    apt-get install -y avahi-daemon xterm git build-essential cmake curl ffmpeg git libboost-dev libnss3 mesa-utils qtbase5-dev strace x11-xserver-utils net-tools python3 python3-numpy scrot wget software-properties-common vlc jq udev unrar qt5-image-formats-plugins && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir -p /config /root/.config /home/headless/.vnc && \
-    chown -R headless:headless /config /root/.config /home/headless/.vnc
-
-# Add PPA and install OBS Studio
-RUN apt-get update && \
-    apt-get install -y software-properties-common && \
+    apt-get install -y avahi-daemon xterm git build-essential cmake curl ffmpeg git libboost-dev libnss3 mesa-utils qtbase5-dev strace x11-xserver-utils net-tools python3 python3-numpy scrot wget vlc jq udev unrar qt5-image-formats-plugins software-properties-common && \
     add-apt-repository -y ppa:obsproject/obs-studio && \
     apt-get update && \
     apt-get install -y ffmpeg obs-studio && \
-    apt-get remove --purge -y software-properties-common && \
     apt-get autoremove -y && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Other necessary configurations, avoid using sudo
-RUN sed -i 's/geteuid/getppid/' /usr/bin/vlc && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p /config /root/.config /home/headless/.vnc && \
+    chown -R headless:headless /config /root/.config /home/headless/.vnc && \
+    sed -i 's/geteuid/getppid/' /usr/bin/vlc && \
     ln -s /config/obs-studio/ /root/.config/obs-studio && \
     wget -q -O /tmp/libndi4_4.5.1-1_amd64.deb https://github.com/obs-ndi/obs-ndi/releases/download/4.11.1/libndi5_5.5.3-1_amd64.deb && \
     wget -q -O /tmp/obs-ndi-4.10.0-Ubuntu64.deb https://github.com/obs-ndi/obs-ndi/releases/download/4.11.1/obs-ndi-4.11.1-linux-x86_64.deb && \
