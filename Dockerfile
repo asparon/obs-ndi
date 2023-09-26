@@ -1,6 +1,6 @@
 FROM accetto/ubuntu-vnc-xfce-g3
 
-# Switch to root user to avoid permission issues
+# Switch to root user to avoid permission issues2
 USER root
 
 # Expose ports
