@@ -17,7 +17,7 @@ The VNC password is 'headless'.&#xD;
 You can connect with your own VNC client at 5901 or use the webclient at 6901</Overview>
   <Category>GameServers: Productivity: MediaApp:Video MediaServer:Video</Category>
   <WebUI>http://[IP]:[PORT:6901]/</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/patrickstigler/unraid_app_templates/master/obs-ndi/obs-ndi.xml</TemplateURL>
+  <TemplateURL>https://raw.githubusercontent.com/asparon/obs-ndi/master/obs-ndi.xml</TemplateURL>
   <Icon>https://obsproject.com/assets/images/new_icon_small-r.png</Icon>
   <ExtraParams>--device=/dev/dri</ExtraParams>
   <PostArgs/>
